@@ -6,15 +6,21 @@ import java.io.FileNotFoundException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,6 +28,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	private final String imageurl = "http://a.pomf.se/";
 	private final String tag = "ayy lmao";
+	private String result;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +72,34 @@ public class MainActivity extends Activity {
 			String fullurl = imageurl + jo.getJSONArray("files").getJSONObject(0).get("url");
 			Log.d(tag, fullurl);
 			output.setText(fullurl);
+			result = fullurl;
 		} catch (JSONException e) {
 			Log.e(tag, e.getMessage());
 			Toast toast = Toast.makeText(getApplicationContext(), "Incorrect data received.", Toast.LENGTH_SHORT);
 			toast.show();
 			output.setText(json);
 		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+			case R.id.action_copy:
+				copyToClipboard();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void copyToClipboard() {
+		if (result == null)
+			return;
+		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText("Pomf url", result);
+		clipboard.setPrimaryClip(clip);
 	}
 
 	@Override

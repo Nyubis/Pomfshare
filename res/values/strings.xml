@@ -3,6 +3,7 @@
 
     <string name="app_name">Pomfshare</string>
     <string name="action_settings">Settings</string>
+    <string name="action_copy">Copy</string>
     <string name="hello_world">Hello world!</string>
     <string name="loading">Uploading…</string>
     <string name="imgdesc">The uploaded image</string>
