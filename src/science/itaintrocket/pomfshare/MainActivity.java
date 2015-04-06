@@ -10,6 +10,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,27 +38,28 @@ public class MainActivity extends Activity {
 		
 		Intent intent = getIntent();
 		Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+		ContentResolver cr = getContentResolver();
 		if (imageUri != null) {			
 			Log.d(tag, imageUri.toString());
 			ImageView view = (ImageView)findViewById(R.id.sharedImageView);
 			Bitmap bmp = BitmapFactory.decodeFile(imageUri.toString());
-			Log.d(tag, view.toString());
-			Log.d(tag, intent.getType());
+			Log.d(tag, cr.getType(imageUri));
 			Log.d(tag, imageUri.getLastPathSegment());
 			view.setImageBitmap(bmp);
 			view.setImageURI(imageUri);
 			
 			ParcelFileDescriptor inputPFD = null; 
 			try {
-				inputPFD = getContentResolver().openFileDescriptor(imageUri, "r");				
+				inputPFD = cr.openFileDescriptor(imageUri, "r");				
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Log.e(tag, e.getMessage());
+				Toast toast = Toast.makeText(getApplicationContext(), "Unable to read file.", Toast.LENGTH_SHORT);
+				toast.show();				
 			}
 			
 			FileDescriptor fd = inputPFD.getFileDescriptor();
 			
-			new PostToPomf(this, fd).execute(imageUri.getLastPathSegment(), intent.getType());
+			new PostToPomf(this, fd).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
 		}
 	}
 	
