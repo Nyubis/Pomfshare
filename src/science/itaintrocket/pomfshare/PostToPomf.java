@@ -18,7 +18,6 @@ public class PostToPomf extends AsyncTask<String, Integer, String>{
 	private final String boundary = "*****";
 	private final int maxBufferSize = 1024*1024;
 	private final String tag = "ayy lmao";
-	private final String extensionguess = "jpg";
 	
 	private FileDescriptor file;
 	private MainActivity source;
@@ -33,9 +32,6 @@ public class PostToPomf extends AsyncTask<String, Integer, String>{
 		String filename = params[0];
 		String contentType = params[1];
 		String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(contentType);
-		if (extension == null) {
-			extension = extensionguess; // MimeTypeMap can't always infer the extension correctly
-		}
 		
 		String result = null;
 		try {
