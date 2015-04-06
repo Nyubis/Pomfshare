@@ -92,7 +92,7 @@ public class PostToPomf extends AsyncTask<String, Integer, String>{
 		    
 		} catch(IOException e) {
 			Log.e(tag, e.getMessage());
-			return "Upload failed, check your internet connection";
+			return String.format("Upload failed, check your internet connection (%s)", e.getMessage());
 		}
 
 	    return result;
