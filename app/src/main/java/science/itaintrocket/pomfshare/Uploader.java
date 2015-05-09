@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 import android.os.AsyncTask;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
@@ -20,18 +21,18 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 	private final int maxBufferSize = 1024*1024;
 	private final String tag = "ayy lmao";
 	
-	private FileDescriptor file;
+	private ParcelFileDescriptor file;
 	private MainActivity source;
 	private Service service;
 
 	public enum Service { POMF, UGUU }
 
-	public Uploader(MainActivity sender, FileDescriptor fd, Service service) {
+	public Uploader(MainActivity sender, ParcelFileDescriptor pfd, Service service) {
 		this.source = sender;
-		this.file = fd;
+		this.file = pfd;
 		this.service = service;
 	}
-	
+
 	@Override
 	protected String doInBackground(String... params) {
 		String filename = params[0];
@@ -39,10 +40,10 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 		String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(contentType);
 		String uploadurl = (service == Service.POMF) ? pomfurl : uguuurl;
 		String fieldName = (service == Service.POMF) ? "files[]" : "file";
-		
+
 		String result = null;
 		try {
-	
+
 		    HttpURLConnection conn = (HttpURLConnection) new URL(uploadurl).openConnection();
 
 		    conn.setDoInput(true);
@@ -50,10 +51,10 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 		    conn.setUseCaches(false);
 
 		    conn.setRequestMethod("POST");
-		 
+
 		    conn.setRequestProperty("Connection", "Keep-Alive");
 		    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-		 
+
 		    DataOutputStream out = new DataOutputStream(conn.getOutputStream());
 		    out.writeBytes("--" + boundary + "\r\n");
 		    out.writeBytes(String.format("Content-Disposition: form-data; name=\"%s\";filename=\"%s.%s\"\r\nContent-type: %s\r\n",
@@ -62,7 +63,7 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 		    
 		    Log.d(tag, filename + "." + extension);
 		    
-			FileInputStream fileInputStream = new FileInputStream(file);
+			FileInputStream fileInputStream = new FileInputStream(file.getFileDescriptor());
 		 
 		    int bytesAvailable = fileInputStream.available();
 		    int bufferSize = Math.min(bytesAvailable, maxBufferSize);

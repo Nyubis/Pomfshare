@@ -53,9 +53,7 @@ public class MainActivity extends Activity {
 				toast.show();				
 			}
 			
-			FileDescriptor fd = inputPFD.getFileDescriptor();
-			
-			new Uploader(this, fd, Uploader.Service.UGUU).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
+			new Uploader(this, inputPFD, Uploader.Service.UGUU).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
 		}
 	}
 	
