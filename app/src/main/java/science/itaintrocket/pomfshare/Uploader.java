@@ -13,18 +13,23 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 
-public class PostToPomf extends AsyncTask<String, Integer, String>{
-	private final String pomfurl = "http://pomf.se/upload.php";
+public class Uploader extends AsyncTask<String, Integer, String>{
+	private final String pomfurl = "http://pomf.se/upload.php?output=gyazo";
+	private final String uguuurl = "http://uguu.se/api.php?d=upload";
 	private final String boundary = "*****";
 	private final int maxBufferSize = 1024*1024;
 	private final String tag = "ayy lmao";
 	
 	private FileDescriptor file;
 	private MainActivity source;
+	private Service service;
 
-	public PostToPomf(MainActivity sender, FileDescriptor fd) {
+	public enum Service { POMF, UGUU }
+
+	public Uploader(MainActivity sender, FileDescriptor fd, Service service) {
 		this.source = sender;
 		this.file = fd;
+		this.service = service;
 	}
 	
 	@Override
@@ -32,16 +37,18 @@ public class PostToPomf extends AsyncTask<String, Integer, String>{
 		String filename = params[0];
 		String contentType = params[1];
 		String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(contentType);
+		String uploadurl = (service == Service.POMF) ? pomfurl : uguuurl;
+		String fieldName = (service == Service.POMF) ? "files[]" : "file";
 		
 		String result = null;
 		try {
 	
-		    HttpURLConnection conn = (HttpURLConnection) new URL(pomfurl).openConnection();
-		 
+		    HttpURLConnection conn = (HttpURLConnection) new URL(uploadurl).openConnection();
+
 		    conn.setDoInput(true);
 		    conn.setDoOutput(true);
 		    conn.setUseCaches(false);
-		 
+
 		    conn.setRequestMethod("POST");
 		 
 		    conn.setRequestProperty("Connection", "Keep-Alive");
@@ -49,8 +56,8 @@ public class PostToPomf extends AsyncTask<String, Integer, String>{
 		 
 		    DataOutputStream out = new DataOutputStream(conn.getOutputStream());
 		    out.writeBytes("--" + boundary + "\r\n");
-		    out.writeBytes(String.format("Content-Disposition: form-data; name=\"files[]\";filename=\"%s.%s\"\r\nContent-type: %s\r\n",
-		    		filename, extension, contentType));
+		    out.writeBytes(String.format("Content-Disposition: form-data; name=\"%s\";filename=\"%s.%s\"\r\nContent-type: %s\r\n",
+		    		fieldName, filename, extension, contentType));
 		    out.writeBytes("\r\n");
 		    
 		    Log.d(tag, filename + "." + extension);

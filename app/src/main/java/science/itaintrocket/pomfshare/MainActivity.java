@@ -3,9 +3,6 @@ package science.itaintrocket.pomfshare;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
@@ -27,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private final String imageurl = "http://a.pomf.se/";
 	private final String tag = "ayy lmao";
 	private String result;
 
@@ -47,7 +43,7 @@ public class MainActivity extends Activity {
 			Log.d(tag, imageUri.getLastPathSegment());
 			view.setImageBitmap(bmp);
 			view.setImageURI(imageUri);
-			
+
 			ParcelFileDescriptor inputPFD = null; 
 			try {
 				inputPFD = cr.openFileDescriptor(imageUri, "r");				
@@ -59,28 +55,15 @@ public class MainActivity extends Activity {
 			
 			FileDescriptor fd = inputPFD.getFileDescriptor();
 			
-			new PostToPomf(this, fd).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
+			new Uploader(this, fd, Uploader.Service.UGUU).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
 		}
 	}
 	
-	public void finishUpload(String json) {
-		if (json == null)
-			return;
-
+	public void finishUpload(String resultUrl) {
 		EditText output = (EditText) findViewById(R.id.outputField);
-		
-		try {
-			JSONObject jo = new JSONObject(json);
-			String fullurl = imageurl + jo.getJSONArray("files").getJSONObject(0).get("url");
-			Log.d(tag, fullurl);
-			output.setText(fullurl);
-			result = fullurl;
-		} catch (JSONException e) {
-			Log.e(tag, e.getMessage());
-			Toast toast = Toast.makeText(getApplicationContext(), "Incorrect data received.", Toast.LENGTH_SHORT);
-			toast.show();
-			output.setText(json);
-		}
+		output.setText(resultUrl);
+		// set for clipboard
+		result = resultUrl;
 	}
 	
 	@Override
