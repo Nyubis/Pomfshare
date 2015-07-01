@@ -1,6 +1,6 @@
 # Pomfshare
-*A simple Android client for [pomf.se](http://pomf.se)*
+*A simple Android client for [uguu.se](http://uguu.se)*
 
-![Example screenshot](http://a.pomf.se/aisvbx.png)
+![Example screenshot](https://raw.githubusercontent.com/Nyubis/Pomfshare/master/screenshot.png)
 
-Pomshare uses Android's built-in sharing menu to easily upload files to [pomf.se](http://pomf.se), a free quality filehost. No timeouts, no logins. 50 MiB maximum. Usage of this app is subject to their simple [terms of service](http://pomf.se/faq.html).
+Pomshare uses Android's built-in sharing menu to easily upload files to [uguu.se](http://uguu.se), a free temporary filehost. No waiting screens, no logins. 100 MB files stored for 24 hours.
