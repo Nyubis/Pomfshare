@@ -81,7 +81,7 @@ public class MainActivity extends Activity {
 		if (result == null)
 			return;
 		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-		ClipData clip = ClipData.newPlainText("Pomf url", result);
+		ClipData clip = ClipData.newPlainText("Upload url", result);
 		clipboard.setPrimaryClip(clip);
 	}
 
