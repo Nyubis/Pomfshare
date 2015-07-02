@@ -19,6 +19,8 @@ import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -26,12 +28,14 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	private final String tag = "ayy lmao";
 	private String result;
+	private Button copyButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
+		copyButton = (Button) findViewById(R.id.copyButton);
 		Intent intent = getIntent();
 		Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
 		ContentResolver cr = getContentResolver();
@@ -62,20 +66,15 @@ public class MainActivity extends Activity {
 		output.setText(resultUrl);
 		// set for clipboard
 		result = resultUrl;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-			case R.id.action_copy:
+		copyButton.setEnabled(true);
+		copyButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 				copyToClipboard();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+			}
+		});
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void copyToClipboard() {
 		if (result == null)
@@ -83,6 +82,8 @@ public class MainActivity extends Activity {
 		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 		ClipData clip = ClipData.newPlainText("Upload url", result);
 		clipboard.setPrimaryClip(clip);
+		Toast t = Toast.makeText(getApplicationContext(), "Copied", Toast.LENGTH_SHORT);
+		t.show();
 	}
 
 	@Override

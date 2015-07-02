@@ -35,6 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/loading"/>
+    <Button
+        android:id="@+id/copyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="Copy URL"/>
 	    
 	    
 </LinearLayout>
