@@ -15,21 +15,19 @@ import android.webkit.MimeTypeMap;
 
 
 public class Uploader extends AsyncTask<String, Integer, String>{
-	private final String uguuurl = "http://uguu.se/api.php?d=upload";
 	private final String boundary = "*****";
 	private final int maxBufferSize = 1024*1024;
 	private final String tag = "ayy lmao";
 	
 	private ParcelFileDescriptor file;
 	private MainActivity source;
-	private Service service;
+	private Host host;
 
-	public enum Service { UGUU }
 
-	public Uploader(MainActivity sender, ParcelFileDescriptor pfd, Service service) {
+	public Uploader(MainActivity sender, ParcelFileDescriptor pfd, Host host) {
 		this.source = sender;
 		this.file = pfd;
-		this.service = service;
+		this.host = host;
 	}
 
 	@Override
@@ -37,8 +35,8 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 		String filename = params[0];
 		String contentType = params[1];
 		String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(contentType);
-		String uploadurl = uguuurl;
-		String fieldName = "file";
+		String uploadurl = host.getUrl();
+		String fieldName = (host.getType() == Host.Type.POMF) ? "files[]" : "file";
 
 		String result = null;
 		try {

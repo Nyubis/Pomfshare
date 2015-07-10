@@ -1,8 +1,5 @@
 package science.itaintrocket.pomfshare;
 
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
@@ -18,12 +15,13 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.FileNotFoundException;
 
 public class MainActivity extends Activity {
 	private final String tag = "ayy lmao";
@@ -56,8 +54,10 @@ public class MainActivity extends Activity {
 				Toast toast = Toast.makeText(getApplicationContext(), "Unable to read file.", Toast.LENGTH_SHORT);
 				toast.show();				
 			}
-			
-			new Uploader(this, inputPFD, Uploader.Service.UGUU).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
+
+			Host uguu = new Host("Uguu", "http://uguu.se/api.php?d=upload", "100MB, 24 hours", Host.Type.UGUU);
+
+			new Uploader(this, inputPFD, uguu).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
 		}
 	}
 	
@@ -92,5 +92,4 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
 }
