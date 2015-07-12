@@ -2,6 +2,7 @@ package science.itaintrocket.pomfshare;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentResolver;
@@ -32,6 +33,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		Intent i = new Intent(this, HostListActivity.class);
+		startActivity(i);
 
 		copyButton = (Button) findViewById(R.id.copyButton);
 		Intent intent = getIntent();
