@@ -28,6 +28,8 @@ public class MainActivity extends Activity {
 	private final String tag = "ayy lmao";
 	private String result;
 	private Button copyButton;
+	private Uri imageUri;
+	private static final int CHOOSE_HOST = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +37,17 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		Intent i = new Intent(this, HostListActivity.class);
-		startActivity(i);
+		startActivityForResult(i, CHOOSE_HOST);
 
 		copyButton = (Button) findViewById(R.id.copyButton);
 		Intent intent = getIntent();
-		Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+		imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+	}
+
+	private void displayAndUpload(Host host) {
 		ContentResolver cr = getContentResolver();
-		if (imageUri != null) {			
-			Log.d(tag, imageUri.toString());
+		if (imageUri != null) {
 			ImageView view = (ImageView)findViewById(R.id.sharedImageView);
-			Bitmap bmp = BitmapFactory.decodeFile(imageUri.toString());
-			Log.d(tag, cr.getType(imageUri));
-			Log.d(tag, imageUri.getLastPathSegment());
-			view.setImageBitmap(bmp);
 			view.setImageURI(imageUri);
 
 			ParcelFileDescriptor inputPFD = null; 
@@ -60,7 +60,6 @@ public class MainActivity extends Activity {
 			}
 
 			Host uguu = new Host("Uguu", "http://uguu.se/api.php?d=upload", "100MB, 24 hours", Host.Type.UGUU);
-
 			new Uploader(this, inputPFD, uguu).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
 		}
 	}
@@ -88,6 +87,15 @@ public class MainActivity extends Activity {
 		clipboard.setPrimaryClip(clip);
 		Toast t = Toast.makeText(getApplicationContext(), "Copied", Toast.LENGTH_SHORT);
 		t.show();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == CHOOSE_HOST && resultCode == RESULT_OK) {
+			Host chosen = new Host(data.getBundleExtra("Host"));
+			Log.d(tag, "Chose " + chosen.getName());
+			displayAndUpload(chosen);
+		}
 	}
 
 	@Override
