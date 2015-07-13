@@ -95,6 +95,10 @@ public class MainActivity extends Activity {
 			Host chosen = new Host(data.getBundleExtra("Host"));
 			Log.d(tag, "Chose " + chosen.getName());
 			displayAndUpload(chosen);
+		} else {
+			// User cancels
+			Log.d(tag, "Canceled");
+			finish();
 		}
 	}
 
