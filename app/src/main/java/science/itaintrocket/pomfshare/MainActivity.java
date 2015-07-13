@@ -56,8 +56,7 @@ public class MainActivity extends Activity {
 				toast.show();				
 			}
 
-			Host uguu = new Host("Uguu", "http://uguu.se/api.php?d=upload", "100MB, 24 hours", Host.Type.UGUU);
-			new Uploader(this, inputPFD, uguu).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
+			new Uploader(this, inputPFD, host).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
 		}
 	}
 	

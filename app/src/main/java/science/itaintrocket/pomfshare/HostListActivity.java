@@ -14,10 +14,12 @@ public class HostListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 
-		hosts = new Host[3];
+		// This should probably be stored in a proper format at some point, but cba now
+		hosts = new Host[4];
 		hosts[0] = new Host("Uguu", "http://uguu.se/api.php?d=upload", "100MB, 24 hours", Host.Type.UGUU);
-		hosts[1] = new Host("Pomf", "http://pomf.se/upload.php?output=gyazo", "50MB", Host.Type.POMF);
-		hosts[2] = new Host("Some Pomf clone", "http://example.com/upload.php?output=gyazo", "┐(´∀｀)┌", Host.Type.POMF);
+		hosts[1] = new Host("1339", "http://1339.cf/upload.php?output=gyazo", "100MB", Host.Type.POMF);
+		hosts[2] = new Host("SICP", "http://sicp.me/", "25MB", Host.Type.UGUU);
+		hosts[3] = new Host("Pomf.cat", "http://pomf.cat/upload.php?output=gyazo", "50MB, Work in progress", Host.Type.POMF);
 
 		ListAdapter adapter = new HostArrayAdapter(this, hosts);
 
