@@ -1,7 +1,6 @@
 package science.itaintrocket.pomfshare;
 
 import java.io.DataOutputStream;
-import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
