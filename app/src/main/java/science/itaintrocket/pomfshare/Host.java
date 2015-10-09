@@ -22,6 +22,13 @@ public class Host {
 		this.type = type;
 	}
 
+	public Host(String name, String url, Type type){
+		this.name = name;
+		this.url = url;
+		this.description = "No Description";
+		this.type = type;
+	}
+
 	public Host(Bundle bundle) {
 		this(
 				bundle.getString(NAME_FIELD),
