@@ -16,7 +16,7 @@ public class HostListActivity extends ListActivity {
 
 		// This should probably be stored in a proper format at some point, but cba now
 		hosts = new Host[17];
-		hosts[0] = new Host("Uguu", "http://uguu.se/api.php?d=upload-tool", "100MB, 24 hours", Host.Type.UGUU);
+		hosts[0] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MB, 24 hours", Host.Type.UGUU);
 		hosts[1] = new Host("1339", "http://1339.cf/upload.php?output=gyazo", "100MB", Host.Type.POMF);
 		hosts[2] = new Host("SICP", "http://sicp.me/", "25MB", Host.Type.UGUU);
 		hosts[3] = new Host("Pomf.cat", "http://pomf.cat/upload.php?output=gyazo", "50MB, Work in progress", Host.Type.POMF);
