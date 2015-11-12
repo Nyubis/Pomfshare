@@ -33,7 +33,7 @@ public class HostListActivity extends ListActivity {
         hosts[13] = new Host("pantsu.cat", "https://pantsu.cat/upload.php?output=gyazo", Host.Type.POMF);
         hosts[14] = new Host("pomf.pl", "http://pomf.pl/upload.php?output=gyazo", "http://i.pomf.pl", Host.Type.POMF);
         hosts[15] = new Host("pomf.hummingbird.moe", "http://pomf.hummingbird.moe/upload.php?output=gyazo", "http://a.pomf.hummingbird.moe", Host.Type.POMF);
-        hosts[16] = new Host("pomf.io", "http://pomf.io/upload.php?output=gyazo", Host.Type.POMF);
+        hosts[16] = new Host("pomf.io", "https://pomf.io/upload.php?output=gyazo", Host.Type.POMF);
 		
 		
 		
