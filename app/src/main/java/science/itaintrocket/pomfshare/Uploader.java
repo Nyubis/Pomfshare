@@ -87,7 +87,7 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 		    result = reader.nextLine();
 
 		    Log.d(tag, String.format("%d: %s", responseCode, responseMessage));
-		    Log.d(tag, result);		    
+		    Log.d(tag, result);
 		 
 		    fileInputStream.close();
 		    reader.close();
@@ -99,7 +99,19 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 			return String.format("Upload failed, check your internet connection (%s)", e.getMessage());
 		}
 
-	    return result;
+	    return extractUrl(result);
+	}
+
+	// For some reason unknown to me, a fair amount of the filehosts contain a double occurrence of their
+	// domain in the result, e.g. https://example.com/https://example.com/file.jpg
+	// This method extracts the correct url from such a result
+	private String extractUrl(String result) {
+		String protocol = result.substring(0, result.indexOf(':')); // http or https?
+		int index = result.lastIndexOf(protocol + "://");
+		if (index > 0) {
+			return result.substring(index);
+		}
+		return result;
 	}
 	
 	@Override
