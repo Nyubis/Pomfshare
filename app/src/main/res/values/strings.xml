@@ -7,5 +7,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="loading">Uploading…</string>
     <string name="imgdesc">The uploaded image</string>
-
+    <string name="add_host">Add</string>
+    <string name="host_name">Name</string>
+    <string name="host_url">URL</string>
+    <string name="host_description">Description</string>
+    <string name="pomf_api">Pomf-like API</string>
+    <string name="uguu_api">Uguu-like API</string>
 </resources>

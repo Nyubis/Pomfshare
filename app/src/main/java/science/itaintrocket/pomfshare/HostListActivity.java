@@ -3,9 +3,13 @@ package science.itaintrocket.pomfshare;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
 
 public class HostListActivity extends ListActivity {
 	private Host[] hosts;
@@ -42,5 +46,47 @@ public class HostListActivity extends ListActivity {
 		data.putExtra("Host", hosts[position].toBundle());
 		setResult(RESULT_OK, data);
 		super.finish();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.list, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+			case R.id.add_host:
+				showAddHostDialog();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	private void showAddHostDialog() {
+		new AddHostDialogFragment().show(getFragmentManager(), "add_host");
+	}
+
+	public void onRadioButtonClicked(View view) {
+		// Is the button now checked?
+		boolean checked = ((RadioButton) view).isChecked();
+
+		// Check which radio button was clicked
+		switch(view.getId()) {
+			case R.id.pomf_api:
+				if (checked) {
+					// Pirates are the best
+					Log.d("ayy lmao", "pirates obv best");
+				}
+				break;
+			case R.id.uguu_api:
+				if (checked)
+					// Ninjas rule
+					break;
+		}
 	}
 }
