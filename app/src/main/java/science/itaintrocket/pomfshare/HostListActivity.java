@@ -29,7 +29,7 @@ public class HostListActivity extends ListActivity {
 		hosts[10] = new Host("openhost.xyz", "http://openhost.xyz/upload.php?output=gyazo", "1024MiB", Host.Type.POMF);
 		hosts[11] = new Host("pomf.pl", "http://pomf.pl/upload.php?output=gyazo", Host.Type.POMF);
 		hosts[12] = new Host("pomf.hummingbird.moe", "http://pomf.hummingbird.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
-		hosts[13] = new Host("pomf.lesderid.net", "https://pomf.lesderid.net/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
+		hosts[13] = new Host("p.fuwafuwa.moe", "https://p.fuwafuwa.moe/upload.php?output=gyazo", "128MiB", Host.Type.POMF);
 
 		ListAdapter adapter = new HostArrayAdapter(this, hosts);
 
