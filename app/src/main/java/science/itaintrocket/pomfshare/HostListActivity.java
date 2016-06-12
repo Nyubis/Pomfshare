@@ -21,16 +21,17 @@ public class HostListActivity extends ListActivity {
 		hosts[2] = new Host("comfy.moe", "https://comfy.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
 		hosts[3] = new Host("cuntflaps.me", "https://cuntflaps.me/upload.php?output=gyazo", "250MiB", Host.Type.POMF);
 		hosts[4] = new Host("desu.sh", "https://desu.sh/upload.php?output=gyazo", "2GiB", Host.Type.POMF);
-		hosts[5] = new Host("glop.me", "https://glop.me/upload.php?output=gyazo", "10MiB", Host.Type.POMF);
-		hosts[6] = new Host("kyaa.sg", "https://kyaa.sg/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
-		hosts[7] = new Host("Mixtape.moe", "https://mixtape.moe/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
-		hosts[8] = new Host("p.fuwafuwa.moe", "https://p.fuwafuwa.moe/upload.php?output=gyazo", "128MiB", Host.Type.POMF);
-		hosts[9] = new Host("Pomf.cat", "http://pomf.cat/upload.php?output=gyazo", "50MiB, Work in progress", Host.Type.POMF);
-		hosts[10] = new Host("pomf.is", "https://pomf.is/upload.php?output=gyazo", "256MiB", Host.Type.POMF);
-		hosts[11] = new Host("g.zxq.co", "http://g.zxq.co/upload.php?output=gyazo", "80MiB", Host.Type.POMF);
-		hosts[12] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
-		hosts[13] = new Host("SICP", "http://sicp.me/", "25MiB", Host.Type.UGUU);
-		hosts[14] = new Host("up.che.moe", "http://up.che.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
+		hosts[5] = new Host("filebunker.pw", "https://filebunker.pw/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
+		hosts[6] = new Host("glop.me", "https://glop.me/upload.php?output=gyazo", "10MiB", Host.Type.POMF);
+		hosts[7] = new Host("kyaa.sg", "https://kyaa.sg/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
+		hosts[8] = new Host("Mixtape.moe", "https://mixtape.moe/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
+		hosts[9] = new Host("p.fuwafuwa.moe", "https://p.fuwafuwa.moe/upload.php?output=gyazo", "128MiB", Host.Type.POMF);
+		hosts[10] = new Host("Pomf.cat", "http://pomf.cat/upload.php?output=gyazo", "50MiB, Work in progress", Host.Type.POMF);
+		hosts[11] = new Host("pomf.is", "https://pomf.is/upload.php?output=gyazo", "256MiB", Host.Type.POMF);
+		hosts[12] = new Host("g.zxq.co", "http://g.zxq.co/upload.php?output=gyazo", "80MiB", Host.Type.POMF);
+		hosts[13] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
+		hosts[14] = new Host("SICP", "http://sicp.me/", "25MiB", Host.Type.UGUU);
+		hosts[15] = new Host("up.che.moe", "http://up.che.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
 
 		ListAdapter adapter = new HostArrayAdapter(this, hosts);
 
