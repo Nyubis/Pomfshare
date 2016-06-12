@@ -15,7 +15,7 @@ public class HostListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		// This should probably be stored in a proper format at some point, but cba now
-		hosts = new Host[12];
+		hosts = new Host[11];
 		hosts[0] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
 		hosts[1] = new Host("Mixtape.moe", "https://mixtape.moe/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
 		hosts[2] = new Host("pomf.is", "https://pomf.is/upload.php?output=gyazo", "256MiB", Host.Type.POMF);
@@ -26,8 +26,7 @@ public class HostListActivity extends ListActivity {
 		hosts[7] = new Host("g.zxq.co", "http://g.zxq.co/upload.php?output=gyazo", "80MiB", Host.Type.POMF);
 		hosts[8] = new Host("openhost.xyz", "http://openhost.xyz/upload.php?output=gyazo", "1024MiB", Host.Type.POMF);
 		hosts[9] = new Host("pomf.pl", "http://pomf.pl/upload.php?output=gyazo", Host.Type.POMF);
-		hosts[10] = new Host("pomf.hummingbird.moe", "http://pomf.hummingbird.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
-		hosts[11] = new Host("pomf.lesderid.net", "https://pomf.lesderid.net/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
+		hosts[10] = new Host("pomf.lesderid.net", "https://pomf.lesderid.net/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
 
 		ListAdapter adapter = new HostArrayAdapter(this, hosts);
 
