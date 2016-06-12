@@ -15,7 +15,7 @@ public class HostListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		// This should probably be stored in a proper format at some point, but cba now
-		hosts = new Host[22];
+		hosts = new Host[23];
 		hosts[0] = new Host("1339", "http://1339.cf/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
 		hosts[1] = new Host("cocaine.ninja", "https://cocaine.ninja/upload.php?output=gyazo", "128MiB", Host.Type.POMF);
 		hosts[2] = new Host("comfy.moe", "https://comfy.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
