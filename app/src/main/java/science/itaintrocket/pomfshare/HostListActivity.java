@@ -15,7 +15,7 @@ public class HostListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		// This should probably be stored in a proper format at some point, but cba now
-		hosts = new Host[20];
+		hosts = new Host[21];
 		hosts[0] = new Host("1339", "http://1339.cf/upload.php?output=gyazo", "100MiB", Host.Type.POMF);
 		hosts[1] = new Host("cocaine.ninja", "https://cocaine.ninja/upload.php?output=gyazo", "128MiB", Host.Type.POMF);
 		hosts[2] = new Host("comfy.moe", "https://comfy.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
@@ -33,9 +33,10 @@ public class HostListActivity extends ListActivity {
 		hosts[14] = new Host("Pomf.cat", "http://pomf.cat/upload.php?output=gyazo", "50MiB, Work in progress", Host.Type.POMF);
 		hosts[15] = new Host("pomf.is", "https://pomf.is/upload.php?output=gyazo", "256MiB", Host.Type.POMF);
 		hosts[16] = new Host("qt.cx", "https://qt.cx/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
-		hosts[17] = new Host("SICP", "http://sicp.me/", "25MiB", Host.Type.UGUU);
-		hosts[18] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
-		hosts[19] = new Host("up.che.moe", "http://up.che.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
+		hosts[17] = new Host("reich.io", "https://reich.io/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
+		hosts[18] = new Host("SICP", "http://sicp.me/", "25MiB", Host.Type.UGUU);
+		hosts[19] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
+		hosts[20] = new Host("up.che.moe", "http://up.che.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
 
 		ListAdapter adapter = new HostArrayAdapter(this, hosts);
 
