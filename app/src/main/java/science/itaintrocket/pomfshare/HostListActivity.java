@@ -32,8 +32,8 @@ public class HostListActivity extends ListActivity {
 		hosts[13] = new Host("pomfe.co", "https://pomfe.co/upload.php?output=gyazo", "500MiB", Host.Type.POMF);
 		hosts[14] = new Host("Pomf.cat", "http://pomf.cat/upload.php?output=gyazo", "50MiB, Work in progress", Host.Type.POMF);
 		hosts[15] = new Host("pomf.is", "https://pomf.is/upload.php?output=gyazo", "256MiB", Host.Type.POMF);
-		hosts[16] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
-		hosts[17] = new Host("SICP", "http://sicp.me/", "25MiB", Host.Type.UGUU);
+		hosts[16] = new Host("SICP", "http://sicp.me/", "25MiB", Host.Type.UGUU);
+		hosts[17] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
 		hosts[18] = new Host("up.che.moe", "http://up.che.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
 
 		ListAdapter adapter = new HostArrayAdapter(this, hosts);
