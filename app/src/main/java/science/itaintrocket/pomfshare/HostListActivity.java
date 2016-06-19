@@ -40,6 +40,7 @@ public class HostListActivity extends ListActivity {
 		hosts[21] = new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU);
 		hosts[22] = new Host("up.asis.io", "http://up.asis.io/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
 		hosts[23] = new Host("up.che.moe", "http://up.che.moe/upload.php?output=gyazo", "50MiB", Host.Type.POMF);
+		hosts[24] = new Host("lainfile.pw", "https://lainfile.pw/?output=gyazo", "8MiB", Host.Type.POMF);
 
 		ListAdapter adapter = new HostArrayAdapter(this, hosts);
 
