@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
 
 public class MainActivity extends Activity {
 	private final String tag = "ayy lmao";
@@ -47,16 +45,7 @@ public class MainActivity extends Activity {
 			ImageView view = (ImageView)findViewById(R.id.sharedImageView);
 			view.setImageURI(imageUri);
 
-			ParcelFileDescriptor inputPFD = null; 
-			try {
-				inputPFD = cr.openFileDescriptor(imageUri, "r");				
-			} catch (FileNotFoundException e) {
-				Log.e(tag, e.getMessage());
-				Toast toast = Toast.makeText(getApplicationContext(), "Unable to read file.", Toast.LENGTH_SHORT);
-				toast.show();				
-			}
-
-			new Uploader(this, inputPFD, host).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
+			new Uploader(this, imageUri, host).execute(imageUri.getLastPathSegment(), cr.getType(imageUri));
 		}
 	}
 	

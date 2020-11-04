@@ -1,16 +1,19 @@
 package science.itaintrocket.pomfshare;
 
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
-
+import android.content.ContentResolver;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+
+import java.io.IOException;
+
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class Uploader extends AsyncTask<String, Integer, String>{
@@ -19,13 +22,16 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 	private final String tag = "ayy lmao";
 	
 	private ParcelFileDescriptor file;
+	private Uri contentUri;
+	private ContentResolver contentResolver;
 	private MainActivity source;
 	private Host host;
+	private OkHttpClient client = new OkHttpClient();
 
 
-	public Uploader(MainActivity sender, ParcelFileDescriptor pfd, Host host) {
+	public Uploader(MainActivity sender, Uri contentUri, Host host) {
 		this.source = sender;
-		this.file = pfd;
+		this.contentUri = contentUri;
 		this.host = host;
 	}
 
@@ -33,67 +39,23 @@ public class Uploader extends AsyncTask<String, Integer, String>{
 	protected String doInBackground(String... params) {
 		String filename = params[0];
 		String contentType = params[1];
-		String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(contentType);
 		String uploadurl = host.getUrl();
 		String fieldName = (host.getType() == Host.Type.POMF) ? "files[]" : "file";
 
 		String result = null;
 		try {
+			RequestBody formBody = new MultipartBody.Builder()
+					.setType(MultipartBody.FORM)
+					.addFormDataPart(fieldName, filename,
+							new ContentUriRequestBody(source.getContentResolver(), contentUri))
+					.build();
+			Request request = new Request.Builder().url(uploadurl).post(formBody).build();
+			Response response = client.newCall(request).execute();
 
-		    HttpURLConnection conn = (HttpURLConnection) new URL(uploadurl).openConnection();
-
-		    conn.setDoInput(true);
-		    conn.setDoOutput(true);
-		    conn.setUseCaches(false);
-
-		    conn.setRequestMethod("POST");
-
-		    conn.setRequestProperty("Connection", "Keep-Alive");
-		    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-
-		    DataOutputStream out = new DataOutputStream(conn.getOutputStream());
-		    out.writeBytes("--" + boundary + "\r\n");
-		    out.writeBytes(String.format("Content-Disposition: form-data; name=\"%s\";filename=\"%s.%s\"\r\nContent-type: %s\r\n",
-		    		fieldName, filename, extension, contentType));
-		    out.writeBytes("\r\n");
-		    
-		    Log.d(tag, filename + "." + extension);
-		    
-			FileInputStream fileInputStream = new FileInputStream(file.getFileDescriptor());
-		 
-		    int bytesAvailable = fileInputStream.available();
-		    int bufferSize = Math.min(bytesAvailable, maxBufferSize);
-		    byte[] buffer = new byte[bufferSize];
-		 
-		    Log.d(tag, "Pre-read file " + fileInputStream);
-		    // Read file
-		    int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-		 
-		    while (bytesRead > 0)
-		    {
-		        out.write(buffer, 0, bytesRead);
-		        bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-		    }
-
-		    Log.d(tag, "Post-read file");
-		    out.writeBytes("\r\n");
-		    out.writeBytes("--" + boundary + "--\r\n");
-		 
-		    // Responses from the server (code and message)
-		    int responseCode = conn.getResponseCode();
-		    String responseMessage = conn.getResponseMessage();
-		    
-		    Scanner reader = new Scanner(conn.getInputStream());
-		    result = reader.nextLine();
-
-		    Log.d(tag, String.format("%d: %s", responseCode, responseMessage));
+		    Log.d(tag, String.format("%d: %s", response.code(), response.message()));
+		    result = response.body().string();
 		    Log.d(tag, result);
 		 
-		    fileInputStream.close();
-		    reader.close();
-		    out.flush();
-		    out.close();
-		    
 		} catch(IOException e) {
 			Log.e(tag, e.getMessage());
 			return String.format("Upload failed, check your internet connection (%s)", e.getMessage());

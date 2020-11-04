@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "25.0"
 
     defaultConfig {
         applicationId "science.itaintrocket.pomfshare"
@@ -15,5 +16,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+
+    dependencies {
+         implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     }
 }
