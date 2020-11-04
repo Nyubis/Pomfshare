@@ -19,7 +19,7 @@ public class HostListActivity extends ListActivity {
 
 		// This should probably be stored in a proper format at some point, but cba now
 		hosts = new ArrayList<>();
-		hosts.add(new Host("Pomf.cat", "http://pomf.cat/upload.php?output=gyazo", "75MiB", Host.Type.POMF));
+		hosts.add(new Host("Pomf.cat", "https://pomf.cat/upload.php?output=gyazo", "75MiB", Host.Type.POMF));
 		hosts.add(new Host("SICP", "http://sicp.me/", "25MiB", Host.Type.UGUU));
 		hosts.add(new Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU));
 
