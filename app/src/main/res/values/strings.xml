@@ -7,5 +7,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="loading">Uploading…</string>
     <string name="imgdesc">The uploaded image</string>
+    <string name="copy">Copy</string>
+    <string name="open">Open</string>
 
 </resources>

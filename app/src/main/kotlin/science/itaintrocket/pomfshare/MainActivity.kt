@@ -19,8 +19,8 @@ import android.widget.Toast
 
 class MainActivity : Activity() {
     private val tag = "ayy lmao"
-    private var result: String? = null
     private lateinit var copyButton: Button
+    private lateinit var openButton: Button
     private lateinit var imageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +29,7 @@ class MainActivity : Activity() {
         val i = Intent(this, HostListActivity::class.java)
         startActivityForResult(i, CHOOSE_HOST)
         copyButton = findViewById<View>(R.id.copyButton) as Button
+        openButton = findViewById<View>(R.id.openButton) as Button
         imageUri = intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as Uri
     }
 
@@ -43,21 +44,30 @@ class MainActivity : Activity() {
         val output = findViewById<View>(R.id.outputField) as EditText
         output.setText(resultUrl)
         // set for clipboard
-        result = resultUrl
         copyButton.isEnabled = true
-        copyButton.setOnClickListener { copyToClipboard() }
+        copyButton.setOnClickListener { copyToClipboard(resultUrl) }
+        openButton.isEnabled = true
+        openButton.setOnClickListener { openInBrowser(resultUrl) }
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private fun copyToClipboard() {
-        if (result == null) {
+    private fun copyToClipboard(url: String?) {
+        if (url == null) {
             return
         }
         val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("Upload url", result)
+        val clip = ClipData.newPlainText("Upload url", url)
         clipboard.setPrimaryClip(clip)
         val t = Toast.makeText(applicationContext, "Copied", Toast.LENGTH_SHORT)
         t.show()
+    }
+
+    private fun openInBrowser(url: String?) {
+        if (url == null) {
+            return
+        }
+        val uri: Uri = Uri.parse(url)
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
