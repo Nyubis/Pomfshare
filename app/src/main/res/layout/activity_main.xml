@@ -46,14 +46,14 @@
 			android:layout_height="wrap_content"
 			android:layout_weight=".5"
 			android:enabled="false"
-			android:text="@string/copy"/>
+			android:text="@string/action_copy"/>
 		<Button
 			android:id="@+id/openButton"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_weight=".5"
 			android:enabled="false"
-			android:text="@string/open"/>
+			android:text="@string/action_open"/>
 
 	</LinearLayout>
 

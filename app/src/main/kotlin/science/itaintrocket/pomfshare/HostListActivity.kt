@@ -2,10 +2,8 @@ package science.itaintrocket.pomfshare
 
 import android.support.v4.app.DialogFragment
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.annotation.RequiresApi
 import android.support.v4.app.FragmentActivity
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListAdapter
@@ -14,13 +12,12 @@ import android.widget.Toast
 import java.util.*
 
 
-class HostListActivity() : FragmentActivity(), RequestAuthenticationDialog.RequestAuthenticationDialogListener  {
+class HostListActivity() : FragmentActivity(), RequestAuthenticationDialog.RequestAuthenticationDialogListener {
     private val hosts: MutableList<Host> = ArrayList()
     private lateinit var authManager: AuthManager
 
     private var hostRequestingAuthentication: Host? = null
 
-    @RequiresApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hostlist)

@@ -1,10 +1,6 @@
 package science.itaintrocket.pomfshare
 
-//import android.app.DialogFragment
-
-import android.annotation.TargetApi
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.*

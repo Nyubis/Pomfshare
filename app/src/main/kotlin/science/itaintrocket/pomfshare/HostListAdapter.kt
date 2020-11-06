@@ -1,6 +1,5 @@
 package science.itaintrocket.pomfshare
 
-import android.R
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +25,9 @@ class HostListAdapter(
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val listItemView = view ?: inflater.inflate(R.layout.simple_list_item_2, parent, false)
-        val lineOneView = listItemView.findViewById<View>(R.id.text1) as TextView
-        val lineTwoView = listItemView.findViewById<View>(R.id.text2) as TextView
+        val listItemView = view ?: inflater.inflate(android.R.layout.simple_list_item_2, parent, false)
+        val lineOneView = listItemView.findViewById<View>(android.R.id.text1) as TextView
+        val lineTwoView = listItemView.findViewById<View>(android.R.id.text2) as TextView
         val host = getItem(position) as Host
         lineOneView.text = host.name
         lineTwoView.text = host.description

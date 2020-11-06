@@ -4,11 +4,10 @@
     <string name="app_name">Pomfshare</string>
     <string name="action_settings">Settings</string>
     <string name="action_copy">Copy</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="action_open">Open</string>
     <string name="loading">Uploading…</string>
     <string name="imgdesc">The uploaded image</string>
-    <string name="copy">Copy</string>
-    <string name="open">Open</string>
     <string name="authentication_key">Authentication key</string>
+    <string name="authentication_key_prompt">This host requires an authentication key</string>
 
 </resources>
