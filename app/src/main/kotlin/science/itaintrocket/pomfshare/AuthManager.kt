@@ -1,13 +1,34 @@
 package science.itaintrocket.pomfshare
 
-class AuthManager {
-    // TODO: actual persistence
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+import android.util.Log
+
+class AuthManager(
+        private var settings: SharedPreferences
+) {
+    private val authKeyPrefix = "AUTH_KEY_"
     private val storage: HashMap<String, String> = hashMapOf()
-    fun findAuthKey(host: Host): String? {
-        return storage[host.name]
+
+    constructor(context: Context) : this(PreferenceManager.getDefaultSharedPreferences(context)) {
+        Log.d("ayy lmao", "context: $context")
     }
 
-    fun addAuthKey(host: Host, key: String) {
-        storage[host.name!!] = key
+    fun findAuthKey(host: Host): String? {
+        val hostName = host.name ?: return null
+        if (storage.containsKey(hostName)) {
+            return storage[hostName]
+        }
+        val result = settings.getString(authKeyPrefix + hostName, null)
+        result?.let { storage.put(hostName, it) }
+        return result
+    }
+
+    fun addAuthKey(host: Host, authKey: String) {
+        storage[host.name!!] = authKey
+        val editor: SharedPreferences.Editor = settings.edit()
+        editor.putString(authKeyPrefix + host.name, authKey)
+        editor.apply()
     }
 }

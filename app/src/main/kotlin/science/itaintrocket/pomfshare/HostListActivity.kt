@@ -4,6 +4,7 @@ import android.support.v4.app.DialogFragment
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.annotation.RequiresApi
 import android.support.v4.app.FragmentActivity
 import android.widget.AdapterView.OnItemClickListener
@@ -15,7 +16,7 @@ import java.util.*
 
 class HostListActivity() : FragmentActivity(), RequestAuthenticationDialog.RequestAuthenticationDialogListener  {
     private val hosts: MutableList<Host> = ArrayList()
-    private val authManager = AuthManager()
+    private lateinit var authManager: AuthManager
 
     private var hostRequestingAuthentication: Host? = null
 
@@ -23,6 +24,8 @@ class HostListActivity() : FragmentActivity(), RequestAuthenticationDialog.Reque
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hostlist)
+
+        authManager = AuthManager(PreferenceManager.getDefaultSharedPreferences(applicationContext))
 
         // This should probably be stored in a proper format at some point, but cba now
         hosts.add(Host("Pomf.cat", "https://pomf.cat/upload.php?output=gyazo", "75MiB", Host.Type.POMF))
