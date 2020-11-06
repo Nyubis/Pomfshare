@@ -9,5 +9,6 @@
     <string name="imgdesc">The uploaded image</string>
     <string name="copy">Copy</string>
     <string name="open">Open</string>
+    <string name="authentication_key">Authentication key</string>
 
 </resources>

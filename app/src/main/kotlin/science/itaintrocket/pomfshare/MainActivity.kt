@@ -50,7 +50,6 @@ class MainActivity : Activity() {
         openButton.setOnClickListener { openInBrowser(resultUrl) }
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private fun copyToClipboard(url: String?) {
         if (url == null) {
             return

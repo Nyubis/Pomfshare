@@ -20,11 +20,13 @@ class Uploader(private val source: MainActivity, private val contentUri: Uri, pr
         val fieldName = if (host.type === Host.Type.POMF) "files[]" else "file"
         val result: String
         try {
-            val formBody: RequestBody = MultipartBody.Builder()
+            val formBodyBuilder = MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
-                    .addFormDataPart(fieldName, filename,
-                            ContentUriRequestBody(source.contentResolver, contentUri))
-                    .build()
+                    .addFormDataPart(fieldName, filename, ContentUriRequestBody(source.contentResolver, contentUri))
+            if (host.authRequired == true) {
+                host.authKey?.let { formBodyBuilder.addFormDataPart("uuid", it) }
+            }
+            val formBody: RequestBody = formBodyBuilder.build()
             val request = Request.Builder().url(uploadUrl!!).post(formBody).build()
             val response = client.newCall(request).execute()
             Log.d(tag, String.format("%d: %s", response.code, response.message))
