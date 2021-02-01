@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Помфшер</string>
+    <string name="action_settings">Поставке</string>
+    <string name="action_copy">Копирај</string>
+    <string name="hello_world">Здраво свете!</string>
+    <string name="loading">Отпремам…</string>
+    <string name="imgdesc">Отпремљена слика</string>
+
+</resources>
