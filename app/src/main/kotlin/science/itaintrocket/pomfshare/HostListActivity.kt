@@ -27,7 +27,7 @@ class HostListActivity() : FragmentActivity(), RequestAuthenticationDialog.Reque
         // This should probably be stored in a proper format at some point, but cba now
         hosts.add(Host("Pomf.cat", "https://pomf.cat/upload.php?output=gyazo", "75MiB", Host.Type.POMF))
         hosts.add(Host("SICP", "https://sicp.me/", "25MiB", Host.Type.UGUU, authRequired = true))
-        hosts.add(Host("Uguu", "https://uguu.se/api.php?d=upload-tool", "100MiB, 24 hours", Host.Type.UGUU))
+        hosts.add(Host("Uguu", "https://uguu.se/upload.php?output=gyazo", "128MiB, 48 hours", Host.Type.POMF))
 
         // If authentication data exists for a host, load it
         loadHostAuthentications()
