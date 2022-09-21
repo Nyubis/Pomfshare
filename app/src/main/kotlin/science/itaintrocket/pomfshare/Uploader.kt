@@ -47,6 +47,9 @@ class Uploader(private val source: MainActivity, private val contentUri: Uri, pr
     // domain in the result, e.g. https://example.com/https://example.com/file.jpg
     // This method extracts the correct url from such a result
     private fun extractUrl(result: String): String {
+        if (!result.contains(':')) {
+            return result
+        }
         val protocol = result.substring(0, result.indexOf(':')) // http or https?
         val index = result.lastIndexOf("$protocol://")
         return if (index > 0) {
